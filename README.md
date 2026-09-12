@@ -48,14 +48,15 @@ foto (jpg/png)
    ├─► ¿Qué orientación?     Hough sobre máscara Black-hat            ─► vertical / horizontal / diagonal # Segunda pregunta
    ├─► ¿Está a plomo?        Canny + HoughLinesP (o inclinómetro)     ─► ángulo (°) + categoría # Tercera pregunta
    └─► Riesgo                reglas de ingeniería (risk.py)           ─► BAJO / MEDIO / ALTO + recomendación
+```
 
 ## Explicacion de cada una de las preguntas:
-1) ¿Hay grieta
+1) ¿Hay grieta?
 2) ¿Qué orientación?
 3) ¿Está a plomo?
 
 
-
+## Características: 
 * **⚡ Alto Rendimiento:** Optimizado para procesar datos de forma rápida y eficiente.
 * **🎯 Precisión Integrada:** Algoritmos diseñados para minimizar el margen de error.
 * **📊 Interfaz Visual Clara:** Salidas estructuradas con gráficas e indicadores interactivos.
