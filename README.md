@@ -40,14 +40,14 @@
 
 ## 1. Qué hace el sistema
 
-Prototipo que apartir de una fotografia (de una edificación), se hace tres preguntas con las cuales determina el nivel de riesgo de aquella edificacion a nivel arquitectonico. ⚠️ **Aviso:** Esta aplicación, no es 100$ segura para su implementacion en la vida real.
+Prototipo que apartir de una fotografia (de una edificación), se hace tres preguntas con las cuales determina el nivel de riesgo de aquella edificacion a nivel arquitectonico. ⚠️ **Aviso:** Esta aplicación, no es 100% segura para su implementacion en la vida real.
 
 ```text
 foto (jpg/png)
-   ├─► ¿Hay grieta?          clasificador (línea base o MobileNetV2) ─► clase + probabilidad  Primera pregunta
-   ├─► ¿Qué orientación?     Hough sobre máscara Black-hat            ─► vertical / horizontal / diagonal # Segunda pregunta
-   ├─► ¿Está a plomo?        Canny + HoughLinesP (o inclinómetro)     ─► ángulo (°) + categoría # Tercera pregunta
-   └─► Riesgo                reglas de ingeniería (risk.py)           ─► BAJO / MEDIO / ALTO + recomendación
+   ├─► ¿Hay grieta?          clasificador (línea base o MobileNetV2) ─► clase + probabilidad  **Primera pregunta**
+   ├─► ¿Qué orientación?     Hough sobre máscara Black-hat            ─► vertical / horizontal / diagonal  **Segunda pregunta**
+   ├─► ¿Está a plomo?        Canny + HoughLinesP (o inclinómetro)     ─► ángulo (°) + categoría  **Tercera pregunta**
+   └─► Riesgo                reglas de ingeniería (risk.py)           ─► BAJO / MEDIO / ALTO + recomendación **Clasificación**
 ```
 
 ## Explicacion de cada una de las preguntas:
