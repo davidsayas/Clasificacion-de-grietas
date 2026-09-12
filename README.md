@@ -1,8 +1,7 @@
 <div align="center">
 
-  # 🚀 Nombre de tu Proyecto
-
-  **Una descripción corta, directa e impactante de lo que hace tu aplicación o biblioteca.**
+  # 🚀 CLASIFICACION-DE-GRIETAS-AI
+  **Clasificador de nivel de riesgo de edificaciones postsismo, capaz de salvaguardar vidas en situaciones de emergia como lo son los sismos.**
 
   [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](#)
   [![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green?logo=opencv&logoColor=white)](#)
@@ -51,7 +50,7 @@ foto (jpg/png)
 ```
 
 ## Explicacion de cada una de las preguntas:
-1) ¿Hay grieta?
+1) ¿Hay grieta? 
 2) ¿Qué orientación?
 3) ¿Está a plomo?
 
