@@ -1,4 +1,3 @@
-# Clasificacion-de-grietas}
 <div align="center">
 
   # 🚀 Clasificador-De-Grietas-AI
