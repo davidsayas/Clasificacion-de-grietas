@@ -44,7 +44,7 @@ Prototipo que apartir de una fotografia (de una edificación), se hace tres preg
 
 ```text
 foto (jpg/png)
-   ├─► ¿Hay grieta?          clasificador (línea base o MobileNetV2) ─► clase + probabilidad # Primera pregunta
+   ├─► ¿Hay grieta?          clasificador (línea base o MobileNetV2) ─► clase + probabilidad  Primera pregunta
    ├─► ¿Qué orientación?     Hough sobre máscara Black-hat            ─► vertical / horizontal / diagonal # Segunda pregunta
    ├─► ¿Está a plomo?        Canny + HoughLinesP (o inclinómetro)     ─► ángulo (°) + categoría # Tercera pregunta
    └─► Riesgo                reglas de ingeniería (risk.py)           ─► BAJO / MEDIO / ALTO + recomendación
