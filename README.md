@@ -231,11 +231,10 @@ Son reglas orientativas basadas en la práctica de inspección visual y la NSR-1
 
 | Integrante | Rol |
 |---|---|
-| _Nombre 1_ | _rol_ |
-| _Nombre 2_ | _rol_ |
-| _Nombre 3_ | _rol_ |
+| Juan David Sayas Hernández |Product owner, developer |
+| Erick Fabian Cárdenas Bello | Developer |
 
-Docente: _nombre_ · Curso: Algoritmos y Programación 2026-2 · Programa: Ingeniería en Inteligencia Artificial, UIS.
+Docente:  Jheyston Omar Serrano Luna · Curso: Algoritmos y Programación 2026-2 · Programa: Ingeniería en Inteligencia Artificial, UIS.
 
 ## 📄 Licencia y créditos
 
