@@ -438,8 +438,8 @@ Reglas orientativas basadas en la práctica de inspección visual y la NSR-10, p
 
 | Integrante | Rol |
 |---|---|
-| Juan David Sayas Hernández | Product owner, developer |
-| Erick Fabian Cárdenas Bello | Developer |
+| Juan David Sayas Hernández | ML ENGINEER |
+| Erick Fabian Cárdenas Bello | DATA ANALYST |
 
 Docente: Jheyston Omar Serrano Luna · Curso: Algoritmos y Programación 2026-2 · Programa: Ingeniería en Inteligencia Artificial, UIS.
 
