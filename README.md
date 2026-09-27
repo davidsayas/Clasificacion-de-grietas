@@ -93,7 +93,7 @@ Ambos modelos se evalúan sobre **las mismas 1.200 fotos de prueba** (corrida A,
 
 | | Línea base | MobileNetV2 (.tflite) |
 |---|---|---|
-| Descripción | 16 descriptores (Black-hat, Canny, histograma) + regresión logística | ImageNet preentrenado, cabeza nueva, fine-tuning de 30 capas, float16 |
+| Descripción | 16 descriptores (Black-hat, Canny, histograma) + regresión logística | ImageNet preentrenado, aumentación, cabeza nueva, fine-tuning de 30 capas, float16 |
 | Exactitud | *[pendiente]* | **0,9967** |
 | Precisión | *[pendiente]* | 0,9983 |
 | Recall | *[pendiente]* | 0,9950 |
@@ -120,7 +120,7 @@ Las imágenes con grieta son sistemáticamente más oscuras: la grieta es una l�
 
 Tamaño del efecto de Cohen: **d ≈ 0,85**, considerado grande.
 
-**Consecuencia:** el brillo es un **atajo espurio**. Un clasificador que solo mirara el brillo acertaría bastante por encima del azar sin entender nada de grietas. Una estimación teórica sugiere cerca del 67 %; **está pendiente de verificarse experimentalmente**.
+**Consecuencia:** el brillo es un **atajo espurio**. Un clasificador que solo mirara el brillo acertaría bastante por encima del azar sin entender nada de grietas. Una estimación teórica sugiere cerca del 67 %; **está pendiente de verificarse experimentalmente**. Para neutralizarlo, el entrenamiento incluye aumentación de brillo (ver la sección del modelo).
 
 ### Estadísticos por canal
 
@@ -149,11 +149,17 @@ En la carpeta `Positive`, **9.379 de las 20.000 imágenes terminan en `_1`**, y 
 ### Arquitectura
 
 ```
-MobileNetV2 (preentrenada en ImageNet, include_top=False)
+Aumentación (solo al entrenar)   volteos, rotación, zoom, brillo, contraste
     ↓
-GlobalAveragePooling2D        1.280 mapas de 7×7  →  1.280 números
+preprocess_input                 píxeles 0-255  →  [-1, 1]
     ↓
-Dense(1, sigmoide)            →  probabilidad entre 0 y 1
+MobileNetV2 (ImageNet, include_top=False, en modo inferencia)
+    ↓
+GlobalAveragePooling2D           1.280 mapas de 7×7  →  1.280 números
+    ↓
+Dropout(0,3)
+    ↓
+Dense(1, sigmoide)               →  probabilidad entre 0 y 1
 ```
 
 **Por qué MobileNetV2** (Sandler et al., Google, CVPR 2018): usa **convolución separable en profundidad**, que divide la convolución en un filtrado espacial por canal (*depthwise*) y una combinación de canales con filtros 1×1 (*pointwise*). Su costo relativo es `1/C_salida + 1/K²`, que con filtros de 3×3 tiende al **11 %** del de una convolución normal. Eso permite correr en celulares de gama baja sin conexión.
@@ -179,7 +185,21 @@ Los 1.281 del clasificador son 1.280 pesos, uno por cada número que entrega el 
 
 El clasificador arranca al azar: con la base libre, sus errores grandes destruirían los pesos preentrenados. La tasa cien veces menor en la fase 2 retoca esos pesos sin reescribirlos.
 
-**Configuración común:** Adam, entropía cruzada binaria, lote de 32, parada temprana sobre la pérdida de validación con `restore_best_weights=True`.
+**Configuración común:** Adam, entropía cruzada binaria, lote de 32, Dropout de 0,3 antes de la capa final, y parada temprana sobre la pérdida de validación con `restore_best_weights=True`. La base corre en modo inferencia (`training=False`) incluso durante el ajuste fino, lo que mantiene fijas las estadísticas de sus capas de normalización.
+
+### Aumentación de datos
+
+Se aplica solo durante el entrenamiento, antes de normalizar, sobre píxeles de 0 a 255. En inferencia estas capas no actúan, y el `.tflite` exportado no las incluye.
+
+| Transformación | Parámetro | Rango efectivo |
+|---|---|---|
+| Volteo | horizontal y vertical | — |
+| Rotación | 0,15 | ±54° |
+| Zoom | 0,1 | ±10 % |
+| Brillo | 0,2 | ±51 niveles sobre 255 |
+| Contraste | 0,2 | ±20 % |
+
+**La aumentación de brillo neutraliza el atajo del análisis exploratorio.** La diferencia de brillo entre clases es de unos 18 niveles; la aumentación varía el brillo de cada imagen hasta ±51, casi tres veces más. Así el brillo global deja de servir como pista, mientras se conserva el contraste local: la grieta sigue siendo más oscura que el concreto que la rodea. Queda pendiente verificarlo experimentalmente.
 
 ### Partición
 
@@ -218,7 +238,7 @@ La conversión a TensorFlow Lite redujo el tamaño **4,9 veces**. Procesar de a 
 
 **2. Cambio de dominio con una imagen sintética.** Una imagen dibujada de demostración es clasificada *con grieta* por la línea base (p = 1,00) y *sin grieta* por MobileNetV2 (p = 0,23). El modelo potente aprendió la textura del concreto real y no reconoce un trazo dibujado; el simple reacciona a cualquier línea oscura.
 
-**3. Falso positivo en una pared real.** Una pared lisa y pintada, **sin grietas**, con una mano encima, fue clasificada *con grieta* con **probabilidad 1,00**. El modelo se especializó en concreto a la vista y no generaliza a superficies distintas. Además falla con máxima confianza, así que un umbral de confianza no lo habría filtrado.
+**3. Falso positivo en una pared real.** Una pared lisa y pintada, **sin grietas**, con una mano encima, fue clasificada *con grieta* con **probabilidad 1,00**. El modelo se especializó en concreto a la vista y no generaliza a superficies distintas. Además falla con máxima confianza, así que un umbral de confianza no lo habría filtrado. Como el modelo se entrenó con aumentación de brillo, la causa más probable no es el brillo, sino una textura que nunca vio y los bordes de la mano, que son líneas de alto contraste, como las grietas.
 
 ---
 
@@ -306,7 +326,7 @@ Clasificacion-de-grietas/
 │   ├── dataset.py                 carga, análisis exploratorio, división 70/15/15
 │   ├── features.py                descriptores de la línea base
 │   ├── baseline.py                entrenamiento + métricas + complejidad
-│   ├── train_transfer.py          MobileNetV2, fine-tuning, exportación TFLite
+│   ├── train_transfer.py          MobileNetV2, aumentación, fine-tuning, exportación TFLite
 │   ├── inclination.py             ángulo de desaplome (Hough o sensor)
 │   ├── risk.py                    orientación de la grieta + reglas de riesgo
 │   ├── predict.py                 CLI: foto → JSON
@@ -386,6 +406,7 @@ Reglas orientativas basadas en la práctica de inspección visual y la NSR-10, p
 - [x] Revisión del estado del arte
 - [x] Línea base con descriptores hechos a mano
 - [x] MobileNetV2 con transfer learning, fine-tuning y exportación a TFLite
+- [x] Aumentación de datos: volteos, rotación, zoom, brillo y contraste
 - [x] Tres corridas comparadas: datos y paciencia de la parada temprana
 - [x] Orientación e inclinación con visión clásica; inclinómetro como alternativa
 - [x] Reglas de riesgo y prototipo de extremo a extremo (CLI + app web)
@@ -395,8 +416,10 @@ Reglas orientativas basadas en la práctica de inspección visual y la NSR-10, p
 
 **Entrega 2 — 23/10/2026**
 
-- [ ] Aumentación de datos, incluido brillo ±25 % para romper el atajo espurio
+- [ ] Cuaderno documentado con el preprocesamiento y la aumentación
+- [ ] Prueba del atajo: verificar si la aumentación de brillo neutralizó la dependencia del brillo
 - [ ] Verificación experimental del clasificador por umbral de brillo
+- [ ] Corrida sin aumentación, para medir su aporte (opcional)
 - [ ] Salida de campo: fotografías propias en dos grupos, uno para entrenar y otro solo para evaluar
 - [ ] Evaluación del modelo actual sobre SDNET2018, como prueba fuera del dominio
 - [ ] Reentrenamiento con superficies lisas, pintadas y pañetadas etiquetadas como sin grieta
@@ -419,10 +442,6 @@ Reglas orientativas basadas en la práctica de inspección visual y la NSR-10, p
 | Erick Fabian Cárdenas Bello | Developer |
 
 Docente: Jheyston Omar Serrano Luna · Curso: Algoritmos y Programación 2026-2 · Programa: Ingeniería en Inteligencia Artificial, UIS.
-
-## 📄 Licencia y créditos
-
-Código bajo licencia MIT (ver `LICENSE`). Dataset *Concrete Crack Images for Classification* — Çağlar Fırat Özgenel, Middle East Technical University, licencia CC BY 4.0. MobileNetV2 — Sandler et al., 2018 (pesos de ImageNet vía Keras). Programación 2026-2 · Programa: Ingeniería en Inteligencia Artificial, UIS.
 
 ## 📄 Licencia y créditos
 
