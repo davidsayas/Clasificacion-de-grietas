@@ -1,0 +1,19 @@
+# Núcleo (corre en cualquier PC sin GPU y también en Streamlit Community Cloud)
+numpy>=1.26
+opencv-python-headless>=4.9
+scikit-learn>=1.4
+scikit-image>=0.22
+pillow>=10.0
+matplotlib>=3.8
+pandas>=2.0
+joblib>=1.3
+
+# Demo web
+streamlit>=1.35
+
+# Intérprete ligero para models/mobilenet.tflite (se instala solo en Linux, p. ej. Streamlit Cloud).
+# En Windows/macOS instala UNO de estos a mano:  pip install ai-edge-litert   ó   pip install tensorflow
+ai-edge-litert; sys_platform == "linux"
+
+# Entrenamiento (src/train_transfer.py): NO se instala aquí; se ejecuta en Google Colab
+# con entrenar_mobilenet_colab.ipynb, donde TensorFlow ya viene preinstalado.

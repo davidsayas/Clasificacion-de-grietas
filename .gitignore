@@ -1,0 +1,12 @@
+data/raw/
+data/synthetic/
+data/*.zip
+data/propias/*.jpg
+models/*.keras
+models/*.h5
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+docs/demo/salida*.jpg
+docs/demo/lineas.jpg
