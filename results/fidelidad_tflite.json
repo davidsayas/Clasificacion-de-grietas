@@ -1,0 +1,20 @@
+{
+  "v2_mobilenet/float32": {
+    "dif_max": 2.682209014892578e-06,
+    "dif_media": 1.4522695247857579e-08,
+    "cambian_de_clase": 0,
+    "n": 300
+  },
+  "v2_mobilenet/dinamico": {
+    "dif_max": 0.022817552089691162,
+    "dif_media": 0.00018919228667688988,
+    "cambian_de_clase": 0,
+    "n": 300
+  },
+  "v2_mobilenet/float16": {
+    "dif_max": 0.006658986210823059,
+    "dif_media": 5.283737485816194e-05,
+    "cambian_de_clase": 0,
+    "n": 300
+  }
+}

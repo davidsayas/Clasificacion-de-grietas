@@ -1,0 +1,12 @@
+{
+  "surface_crack": {
+    "con_grieta": "data/Positive",
+    "sin_grieta": "data/Negative",
+    "grupos": "bloque",
+    "tam_bloque": 44
+  },
+  "negativos_dificiles": {
+    "sin_grieta": "data/dificiles",
+    "grupos": "subcarpeta"
+  }
+}

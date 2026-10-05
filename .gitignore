@@ -1,0 +1,16 @@
+# datos y resultados pesados: NO van a GitHub
+data/
+datos_seg/
+results/*.png
+results/*.csv
+models/*/
+*.keras
+*.tflite
+*.npz
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/

@@ -1,0 +1,9 @@
+# Para correr SOLO la app en tu computador (no incluye lo del entrenamiento).
+# Python recomendado: 3.10, 3.11 o 3.12  (TensorFlow no tiene instaladores para versiones muy nuevas)
+streamlit>=1.35
+tensorflow>=2.15
+numpy
+pandas
+pillow
+opencv-python-headless
+scikit-image

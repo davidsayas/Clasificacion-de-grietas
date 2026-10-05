@@ -1,0 +1,24 @@
+{
+  "n": 29,
+  "con_grieta": 13,
+  "sin_grieta": 16,
+  "forzada": {
+    "exactitud": 0.5517241379310345,
+    "precision": NaN,
+    "recall": 0.0,
+    "f1": NaN,
+    "tp": 0,
+    "tn": 16,
+    "fp": 0,
+    "fn": 13
+  },
+  "con_abstencion": {
+    "n_respondidas": 25,
+    "cobertura": 0.8620689655172413,
+    "exactitud_en_respondidas": 0.64,
+    "falsos_neg_en_respondidas": 9,
+    "falsos_pos_en_respondidas": 0,
+    "grietas_reales_sin_diagnostico": 4,
+    "sin_grieta_sin_diagnostico": 0
+  }
+}
