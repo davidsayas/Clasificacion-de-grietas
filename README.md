@@ -275,13 +275,6 @@ Ejecutan **137 pruebas** con datos sintéticos, sin TensorFlow ni GPU: división
 python -m src.verificar
 ```
 
-## 📚 Material de estudio
-
-La carpeta `taller/` tiene un **reto de implementación**: programar uno mismo la prueba de adyacencia y el reparto por grupos sin fuga. Copia `plantilla_mi_adyacencia.py` como `mi_adyacencia.py`, completa las funciones y comprueba con:
-
-```bash
-python taller/verificar_reto.py
-```
 
 ## 🚧 Limitaciones
 
@@ -319,17 +312,6 @@ python taller/verificar_reto.py
 - Howard, A. et al. (2017). *MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications.*
 
 Las fotografías tomadas de internet para el entrenamiento se usan con fines académicos y **no se redistribuyen** en este repositorio; el informe indica su origen.
-
-## 🔄 Actualizar el repositorio
-
-```bash
-git add .
-git commit -m "Describe qué cambiaste"
-git push origin main
-```
-
-Sin Git, desde el navegador: **Add file → Upload files**, arrastrando todo **menos** `models/`, `data/` y `results/`.
-
 ---
 
 <div align="center">
