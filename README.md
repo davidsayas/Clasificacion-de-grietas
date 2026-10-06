@@ -67,11 +67,6 @@ La prueba **no comparte ninguna imagen ni grupo** con el entrenamiento (se verif
 | Foto entera achicada a 224×224 | 2 / 13 | 0 / 16 |
 | Teselas a escala 0,5 (el que usa la app) | 3 / 13 | 0 / 16 |
 
-<p align="center">
-  <img src="docs/img/f07_matrices_confusion.png" alt="Matrices de confusión de la prueba de Surface Crack y de las 29 fotos propias" width="85%">
-  <br><sub>La misma red en dos pruebas: 99,95 % de exactitud en Surface Crack y 62 % en las fotos propias. La precisión de las fotos propias es 100 % porque casi nunca dice «grieta», pero el recall es de 15 %.</sub>
-</p>
-
 > [!WARNING]
 > **El modelo no transfiere bien al celular.** Acierta todas las fotos propias con las que entrenó y casi ninguna de las nuevas. La explicación más probable es una **confusión de fuente** (en el entrenamiento, las fotos sanas eran de celular y las agrietadas, de internet). **No está demostrada**: se describe en el informe, con el experimento que la confirmaría o la descartaría.
 
