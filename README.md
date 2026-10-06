@@ -306,7 +306,7 @@ python -m src.verificar
 - Sandler, M. et al. (2018). *MobileNetV2: Inverted Residuals and Linear Bottlenecks.* CVPR.
 - Howard, A. et al. (2017). *MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications.*
 
-Las fotografías tomadas de internet para el entrenamiento se usan con fines académicos y **no se redistribuyen** en este repositorio; el informe indica su origen.
+Las fotografías tomadas de internet para el entrenamiento se usan con fines académicos y **no se redistribuyen** en este repositorio.
 ---
 
 <div align="center">
