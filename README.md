@@ -70,7 +70,7 @@ La prueba **no comparte ninguna imagen ni grupo** con el entrenamiento (se verif
 > [!WARNING]
 > **El modelo no transfiere bien al celular.** Acierta todas las fotos propias con las que entrenó y casi ninguna de las nuevas. La explicación más probable es una **confusión de fuente** (en el entrenamiento, las fotos sanas eran de celular y las agrietadas, de internet). **No está demostrada**: se describe en el informe, con el experimento que la confirmaría o la descartaría.
 
-### 🧪 Lo que encontramos en el análisis
+### 🧪 Lo que encontramos en el análisis ( Hacer click en la flechitas <summary><b>-</b></summary>
 
 <details>
 <summary><b>🔓 Una fuga de información en la versión 1</b></summary>
