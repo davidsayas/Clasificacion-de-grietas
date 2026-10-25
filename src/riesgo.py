@@ -14,12 +14,6 @@ FACTOR_CRITICO_INCL_DEG = 3.0
 # el nivel es ALTO "a confirmar" con un nivel o una plomada, en vez de callarlo.
 INCLINACION_SIN_VERIFICAR_MIN_DEG = 5.0
 
-# Heurísticas generales (el documento del reto pide considerar "orientación de la grieta,
-# elemento afectado, ancho aproximado y desaplome"). ORIENTATIVAS: confirmalas con tu docente.
-#   - Una grieta DIAGONAL suele asociarse a cortante o a asentamientos diferenciales; las
-#     verticales u horizontales finas son con más frecuencia de retracción o de juntas.
-#   - Columnas y vigas cargan la estructura: la misma grieta se trata con más cautela que en
-#     un muro divisorio o una placa.
 ORIENTACION_PUNTOS = {"diagonal": 1, "vertical": 0, "horizontal": 0}
 ELEMENTO_PUNTOS = {"columna": 1, "viga": 1, "muro": 0, "placa": 0}
 ELEMENTOS = tuple(ELEMENTO_PUNTOS)
