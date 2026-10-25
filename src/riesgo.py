@@ -1,13 +1,3 @@
-"""riesgo.py — Motor de riesgo: combina grieta, ancho de la grieta e inclinación.
-
-⚠ LOS UMBRALES DE ESTE ARCHIVO SON ORIENTATIVOS. Están arriba, con nombre, para
-que los reemplaces por los de la norma que corresponda (NSR-10 u otra) o por los
-que defina tu docente. El resultado es un TAMIZAJE, no un dictamen estructural.
-
-PRINCIPIO: ante la duda, NO afirmar. Si la imagen no parece concreto, o el modelo
-duda, el resultado es INDETERMINADO y se pide otra foto. Mejor eso que un falso
-positivo (o peor, un falso negativo) con cara de certeza.
-"""
 from __future__ import annotations
 
 from dataclasses import dataclass, field
